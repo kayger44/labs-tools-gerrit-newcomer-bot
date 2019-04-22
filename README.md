@@ -12,7 +12,7 @@ It helps DevRel’s in two ways – providing a solution to welcome newcomers an
 Development
 -----------
 ```
-$ git clone https://github.com/srish/gerrit-newcomer-bot 
+$ git clone git clone https://gerrit.wikimedia.org/r/labs/tools/gerrit-newcomer-bot.git
 $ cd gerrit-newcomer-bot
 $ pip3 install -r requirements
 Copy gerrit.conf.example as gerrit.conf and enter your details
