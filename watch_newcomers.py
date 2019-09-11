@@ -7,6 +7,7 @@
     :author: Srishti Sethi <ssethi@wikimedia.org>
 """
 import os
+import sys
 import configparser
 import queue
 import json
@@ -75,7 +76,7 @@ class WatchPatchsets(threading.Thread):
                 e = 'Error occured while watching event: %s', err
                 logging.debug(e)
                 TWILIO_CLIENT.messages.create(from_=TWILIO['from_num'], to=TWILIO['to_num'], body='Error watching event')
-
+                sys.exit(1)
             finally:
                 SSH_CLIENT.close()
             time.sleep(5)
