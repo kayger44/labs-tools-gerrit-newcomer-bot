@@ -40,6 +40,12 @@ $ become gerrit-newcomer-bot
 $ cd /www/python/src
 ```
 
+This bot uses Kubernetes deployment process detailed here https://wikitech.wikimedia.org/wiki/Help:Toolforge/Kubernetes#Kubernetes_continuous_jobs. To restart the bot, delete the failing kubernetes pod and create the deployment following the steps below:
+```
+$ kubectl delete deployment gerrit-newcomer-bot.bot
+$ kubectl create -f /data/project/gerrit-newcomer-bot/etc/gerrit-newcomer-bot.yaml
+```
+
 Credits 
 -------
 * [Gerrit bot](http://code.google.com/p/gerritbot/) for the initial source 

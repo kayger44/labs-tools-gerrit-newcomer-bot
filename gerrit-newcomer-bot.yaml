@@ -1,0 +1,34 @@
+---
+# Run gerrit-newcomer-bot on kubernetes
+#
+# This file should be placed in the tool directory:
+# `/data/project/gerrit-newcomer-bot/etc`
+#
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: gerrit-newcomer-bot.bot
+  namespace: gerrit-newcomer-bot
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: gerrit-newcomer-bot.bot
+    spec:
+      containers:
+        - name: bot
+          image: docker-registry.tools.wmflabs.org/toollabs-python35-base:latest
+          command: [ "/data/project/gerrit-newcomer-bot/bin/gerrit-newcomer-bot.sh", "run" ]
+          workingDir: /data/project/gerrit-newcomer-bot
+          env:
+            - name: HOME
+              value: /data/project/gerrit-newcomer-bot
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: home
+              mountPath: /data/project/gerrit-newcomer-bot/
+      volumes:
+        - name: home
+          hostPath:
+            path: /data/project/gerrit-newcomer-bot/
